@@ -20,7 +20,8 @@ RUN R --quiet -e "devtools::install_github('IRkernel/IRkernel')"
 RUN R --quiet -e "IRkernel::installspec()"
 
 # Install R-packages from requirements
-RUN R --no-save < /home/requirements.R
+COPY install-irkernel.R /home/install-irkernel.R
+RUN R --no-save -e < /home/requirements.R
 
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
